@@ -23,7 +23,7 @@
                                    type="text"
                                    class="form-control"
                                    minlength="3"
-                                   required>
+                                   >
                         </div>
 
                         <div class="form-group">
@@ -54,14 +54,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="slug">Описание</label>
-                            <textarea name="description" value="{{ $item->description }}"
+                            <label for="description">Описание</label>
+                            <textarea name="description"
                                       id="description"
                                       type="text"
                                       class="form-control"
-                                      rows="3">
-                                {{ $item->description }}
-                            </textarea>
+                                      rows="3">{{ old('description', $item->description) }}</textarea>
                         </div>
 
                     </div>
