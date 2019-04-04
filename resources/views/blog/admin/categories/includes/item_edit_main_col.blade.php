@@ -18,7 +18,7 @@
                     <div class="tab-pane active" id="maindata">
                         <div class="form-group">
                             <label for="title">Заголовок</label>
-                            <input name="title" value="{{ $item->title }}"
+                            <input name="title" value="{{ old('title', $item->title) }}"
                                    id="title"
                                    type="text"
                                    class="form-control"
@@ -32,8 +32,7 @@
                                    id="slug"
                                    type="text"
                                    class="form-control"
-                                   minlength="3"
-                                   required>
+                                   >
                         </div>
 
                         <div class="form-group">
