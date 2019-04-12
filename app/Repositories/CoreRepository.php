@@ -5,6 +5,10 @@ namespace App\Repositories;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * Репозиторий работы с сущностю.
+ * Может выдавать наборы данных.
+ * Неможет изменять сущность.
+ *
  * Class CoreRepository
  * @package App\Repositories
  */
