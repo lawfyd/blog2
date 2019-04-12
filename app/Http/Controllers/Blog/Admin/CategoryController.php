@@ -6,6 +6,7 @@ use App\Models\BlogCategory;
 use App\Http\Requests\BlogCategoryUpdateRequest;
 use App\Http\Requests\BlogCategoryCreateRequest;
 use App\Repositories\BlogCategoryRepository;
+use Illuminate\Support\Str;
 
 class CategoryController extends BaseController
 {
@@ -41,7 +42,7 @@ class CategoryController extends BaseController
     public function create()
     {
         $item = new BlogCategory();
-        $categoryList = BlogCategory::all();
+        $categoryList = $this->blogCategoryRepository->getForComboBox();;
         return view('blog.admin.categories.edit',
             compact('item', 'categoryList'));
     }
@@ -56,7 +57,7 @@ class CategoryController extends BaseController
     {
         $data = $request->input();
         if (empty($data['slug'])) {
-            $data['slug'] = str_slug($data['title']);
+            $data['slug'] = Str::slug($data['title']);
         }
 
         $item = ( new BlogCategory())->create($data);

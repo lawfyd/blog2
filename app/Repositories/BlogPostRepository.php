@@ -47,4 +47,14 @@ class BlogPostRepository extends CoreRepository
 
         return $result;
     }
+
+    /**
+     * Получить моедль для редактирования
+     * @param $id
+     * @return mixed
+     */
+    public function getEdit($id)
+    {
+        return $this->startConditions()->find($id);
+    }
 }
