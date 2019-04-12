@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\BlogPost */
+    /** @var \App\Models\BlogPost $item */
 @endphp
 <div class="row justify-content-center">
     <div class="col-md-12">
@@ -25,6 +25,7 @@
                 <br>
                 <div class="tab-content">
                     <div class="tab-pane active" id="maindata" role="tabpanel">
+                        <input name="id" type="hidden" value="{{ $item->id }}">
                         <div class="form-group">
                             <label for="title">Заголовок</label>
                             <input name="title" value="{{ $item->title }}"
@@ -83,7 +84,7 @@
                             <input name="is_published"
                                    type="checkbox"
                                    class="form-check-input"
-                                   value="{{ $item->is_published }}"
+                                   value="1"
                                    @if($item->is_published)
                                    checked="checked"
                                    @endif>

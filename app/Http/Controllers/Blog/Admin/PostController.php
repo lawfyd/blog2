@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Repositories\BlogPostRepository;
 use App\Repositories\BlogCategoryRepository;
+use App\Http\Requests\BlogPostUpdateRequest;
+use Illuminate\Support\Str;
 
 class PostController extends BaseController
 {
@@ -96,9 +99,28 @@ class PostController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BlogPostUpdateRequest $request, $id)
     {
-        dd($request->all());
+        $item = $this->blogPostRepository->getEdit($id);
+
+        $data = $request->all();
+        if (empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['title']);
+        }
+        if (empty($item->published_at) && $data['is_published']) {
+            $data['published_at'] = Carbon::now();
+        }
+        //dd($data);
+        $result = $item->update($data);
+        if ($result) {
+            return redirect()
+                ->route('blog.admin.posts.edit', $id)
+                ->with(['success' => 'Успешно сохранено']);
+        } else {
+            return back()
+                ->withErrors(['msg' => "Ошибка сохранения"])
+                ->withInput();
+        }
     }
 
     /**
