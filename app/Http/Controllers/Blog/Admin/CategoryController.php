@@ -28,7 +28,6 @@ class CategoryController extends BaseController
      */
     public function index()
     {
-        //$paginator = BlogCategory::paginate(5);
         $paginator = $this->blogCategoryRepository->getAllWithPaginate(5);
 
         return view('blog.admin.categories.index', compact('paginator'));
@@ -56,9 +55,9 @@ class CategoryController extends BaseController
     public function store(BlogCategoryCreateRequest $request)
     {
         $data = $request->input();
-        if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
+//        if (empty($data['slug'])) {
+//            $data['slug'] = Str::slug($data['title']);
+//        }
 
         $item = ( new BlogCategory())->create($data);
 
@@ -110,9 +109,9 @@ class CategoryController extends BaseController
         }
 
         $data = $request->all();
-        if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
+//        if (empty($data['slug'])) {
+//            $data['slug'] = Str::slug($data['title']);
+//        }
 
         $result = $item->update($data);
         if ($result) {
